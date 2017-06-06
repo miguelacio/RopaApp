@@ -73,7 +73,7 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
 
         imageViewProduct = (ImageView) findViewById(R.id.image_view_product);
         textViewProductDescription = (TextView) findViewById(R.id.text_view_product_description);
-        textViewProductName = (TextView) findViewById(text_view_product_name);
+        textViewProductName = (TextView) findViewById(R.id.text_view_product_name);
         textViewProductPrice = (TextView) findViewById(R.id.text_view_product_price);
         buttonBuy = (Button) findViewById(R.id.button_buy);
 

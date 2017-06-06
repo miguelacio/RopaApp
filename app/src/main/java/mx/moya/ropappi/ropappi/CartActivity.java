@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
+import android.service.voice.VoiceInteractionSession;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -108,6 +109,7 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.CartC
                     public void onClick(DialogInterface dialog, int which) {
 
                         payOne(Keys.url_delete_pay_single + product.getId());
+                        makeRequestCartData();
 
                     }
                 })
@@ -154,20 +156,12 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.CartC
                         .setView(R.layout.dialog_payment)
                         .setPositiveButton("Comprar", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-
-                                JSONObject jsonObject = new JSONObject();
-                                JSONArray jsonArray = new JSONArray();
+                                progressDialog = DialogUtil.showProgressDialog(CartActivity.this, "Espere un momento", "Obteniendo categorias");
                                 for (Product p : arrayList) {
-                                    try {
-                                        jsonObject.put(Keys.key_id_producto, p.getId());
-                                        jsonObject.put(Keys.key_id_user, currentUser.getId());
-                                        jsonArray.put(jsonObject);
-                                        payALll(jsonArray);
-
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
+                                    payOnebyOne(Keys.url_delete_pay_single + p.getId());
                                 }
+                                progressDialog.dismiss();
+                                makeRequestCartData();
 
 
                             }
@@ -186,8 +180,29 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.CartC
     }
 
 
-    private void payALll(JSONArray jsonArray) throws JSONException {
+    private void payOnebyOne(String s) {
+
+        JsonObjectRequest jsonArrayRequest = new JsonObjectRequest(Request.Method.DELETE, s, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                if (response != null) {
 
 
+                } else {
+                    progressDialog.dismiss();
+                    Toast.makeText(CartActivity.this, "Algo salió mal, verifica tus datos", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
+            }
+        });
+
+        requestQueue.add(jsonArrayRequest);
     }
+
 }
