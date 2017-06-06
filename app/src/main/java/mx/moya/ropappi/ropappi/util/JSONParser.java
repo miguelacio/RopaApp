@@ -34,7 +34,7 @@ public class JSONParser {
     }
 
 
-    public static ArrayList<Product> parseJsonToProduct(JSONArray jsonArray) throws JSONException {
+    public static ArrayList<Product> parseJsonToProducts(JSONArray jsonArray) throws JSONException {
         ArrayList<Product> productArrayList = new ArrayList<>();
         Product product;
 
@@ -44,6 +44,7 @@ public class JSONParser {
             product.setId(jsonObjectCategoria.getInt(Keys.key_id));
             product.setDescripcion(jsonObjectCategoria.getString(Keys.key_descripcion));
             product.setFoto(jsonObjectCategoria.getString(Keys.key_foto));
+            product.setPrecio(jsonObjectCategoria.getInt(Keys.key_precio));
             product.setNombre(jsonObjectCategoria.getString(Keys.key_nombre));
             productArrayList.add(product);
         }
@@ -56,6 +57,20 @@ public class JSONParser {
 
         user.setNombre(jsonObjectUser.getString(Keys.key_nombre));
         user.setCorreo(jsonObjectUser.getString(Keys.key_correo));
+        user.setId(jsonObjectUser.getInt(Keys.key_id));
         return user;
+    }
+
+    public static Product parseJsonToProduct(JSONObject response) throws JSONException {
+        Product product = new Product();
+
+        product.setId(response.getInt(Keys.key_id));
+        product.setDescripcion(response.getString(Keys.key_descripcion));
+        product.setFoto(response.getString(Keys.key_foto));
+        product.setPrecio(response.getInt(Keys.key_precio));
+        product.setNombre(response.getString(Keys.key_nombre));
+
+        return product;
+
     }
 }

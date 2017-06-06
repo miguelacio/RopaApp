@@ -91,7 +91,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     try {
                         User currentUser = JSONParser.parseJsonToUser(response);
                         sessionStateManager.saveSession(currentUser);
-                        Toast.makeText(LoginActivity.this, "Bienvenido" + currentUser.getNombre(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Bienvenido " + currentUser.getNombre(), Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
                         finish();

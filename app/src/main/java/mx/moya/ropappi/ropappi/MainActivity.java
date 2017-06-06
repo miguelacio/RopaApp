@@ -1,7 +1,9 @@
 package mx.moya.ropappi.ropappi;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -9,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -27,12 +30,14 @@ import mx.moya.ropappi.ropappi.util.CategoryAdapter;
 import mx.moya.ropappi.ropappi.util.DialogUtil;
 import mx.moya.ropappi.ropappi.util.JSONParser;
 import mx.moya.ropappi.ropappi.util.Keys;
+import mx.moya.ropappi.ropappi.util.SessionStateManager;
 
 public class MainActivity extends AppCompatActivity implements CategoryAdapter.CategoryCallbacks {
 
     RequestQueue requestQueue;
     ProgressDialog progressDialog;
     RecyclerView recyclerView;
+    SessionStateManager sessionStateManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements CategoryAdapter.C
         toolbar.setTitle("Bienvenido a RopAppi");
 
         requestQueue = Volley.newRequestQueue(this);
+        sessionStateManager = new SessionStateManager(this);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(MainActivity.this, 2);
 
         recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
@@ -103,6 +109,30 @@ public class MainActivity extends AppCompatActivity implements CategoryAdapter.C
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_go_to_cart:
+                if (sessionStateManager.getCurrentUser() != null) {
+                    Intent intent = new Intent(MainActivity.this, CartActivity.class);
+                    startActivity(intent);
+                } else {
+                    new AlertDialog.Builder(MainActivity.this)
+                            .setTitle("Alto ahí")
+                            .setMessage("Para continuar necesitamos que inicies sesión")
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                                    startActivity(intent);
+
+                                }
+                            })
+                            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                }
+                            })
+                            .setIcon(R.mipmap.ic_launcher_round)
+                            .show();
+                }
                 break;
         }
 

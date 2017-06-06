@@ -1,7 +1,9 @@
 package mx.moya.ropappi.ropappi;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -9,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -22,19 +25,20 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
-import mx.moya.ropappi.ropappi.model.Category;
 import mx.moya.ropappi.ropappi.model.Product;
-import mx.moya.ropappi.ropappi.util.CategoryAdapter;
 import mx.moya.ropappi.ropappi.util.DialogUtil;
 import mx.moya.ropappi.ropappi.util.JSONParser;
 import mx.moya.ropappi.ropappi.util.Keys;
 import mx.moya.ropappi.ropappi.util.ProductAdapter;
+import mx.moya.ropappi.ropappi.util.SessionStateManager;
 
 public class ProductsActivity extends AppCompatActivity implements ProductAdapter.ProductCallbacks {
 
     RequestQueue requestQueue;
     ProgressDialog progressDialog;
     RecyclerView recyclerView;
+    SessionStateManager sessionStateManager;
+
     int id;
 
     @Override
@@ -47,6 +51,7 @@ public class ProductsActivity extends AppCompatActivity implements ProductAdapte
 
 
         requestQueue = Volley.newRequestQueue(this);
+        sessionStateManager = new SessionStateManager(this);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(ProductsActivity.this, 2);
 
         recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
@@ -68,7 +73,7 @@ public class ProductsActivity extends AppCompatActivity implements ProductAdapte
                 progressDialog.dismiss();
 
                 try {
-                    ArrayList<Product> arrayList = JSONParser.parseJsonToProduct(response);
+                    ArrayList<Product> arrayList = JSONParser.parseJsonToProducts(response);
                     ProductAdapter productAdapter = new ProductAdapter(arrayList, ProductsActivity.this);
                     recyclerView.setAdapter(productAdapter);
                 } catch (JSONException e) {
@@ -106,6 +111,31 @@ public class ProductsActivity extends AppCompatActivity implements ProductAdapte
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_go_to_cart:
+
+                if (sessionStateManager.getCurrentUser() != null) {
+                    Intent intent = new Intent(ProductsActivity.this, CartActivity.class);
+                    startActivity(intent);
+                } else {
+                    new AlertDialog.Builder(ProductsActivity.this)
+                            .setTitle("Alto ahí")
+                            .setMessage("Para continuar necesitamos que inicies sesión")
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                    Intent intent = new Intent(ProductsActivity.this, LoginActivity.class);
+                                    startActivity(intent);
+
+                                }
+                            })
+                            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                }
+                            })
+                            .setIcon(R.mipmap.ic_launcher_round)
+                            .show();
+                }
                 break;
         }
 

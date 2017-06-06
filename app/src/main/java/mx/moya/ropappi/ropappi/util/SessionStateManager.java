@@ -21,6 +21,7 @@ public class SessionStateManager {
         editor.putString(Keys.key_nombre, user.getNombre());
         editor.putString(Keys.key_correo, user.getCorreo());
         editor.putString(Keys.key_foto, user.getFoto());
+        editor.putInt(Keys.key_id, user.getId());
 
 
         editor.apply();
@@ -31,6 +32,7 @@ public class SessionStateManager {
         String correo = sharedPreferences.getString(Keys.key_correo, "");
         String nombre = sharedPreferences.getString(Keys.key_nombre, "");
         String foto = sharedPreferences.getString(Keys.key_foto, "");
+        int id = sharedPreferences.getInt(Keys.key_id, -1);
 
 
         if (correo.isEmpty()) {
@@ -40,6 +42,7 @@ public class SessionStateManager {
             user.setCorreo(correo);
             user.setNombre(nombre);
             user.setFoto(foto);
+            user.setId(id);
             return user;
         }
     }

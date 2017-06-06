@@ -10,6 +10,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginRight="5dp"
         android:layout_marginLeft="5dp"
+        android:id="@+id/layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -59,9 +60,20 @@
 
     </RelativeLayout>
 
+
+    <ImageView
+        android:layout_below="@id/layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/logo2" />
+
     <Button
         android:layout_width="match_parent"
         android:text="Crear cuenta"
+        android:textColor="@android:color/white"
+        android:background="@color/colorAccent"
         android:id="@+id/button_create_account"
         android:layout_alignParentBottom="true"
         android:layout_height="wrap_content" />

@@ -3,39 +3,21 @@
 
     <item
         is-multidex="true"
-        jar="/Users/jesusmiguelflores/.android/build-cache/69d14627adec7321b550c8f96f9bab115da815fd/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="38789e20ace9ab7dbd00554bd2673ab424478d3b">
-        <dex dex="/Users/jesusmiguelflores/AndroidStudioProjects/Ropappi/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_14b2daaf0f40da77887329163a228dedac91c268/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/jesusmiguelflores/.android/build-cache/2206ed6dfd47d676a873e7c941b6948d0654a930/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="d4cf6227dd6a2ceff0f7dcf0c324380b7abf2c28">
-        <dex dex="/Users/jesusmiguelflores/AndroidStudioProjects/Ropappi/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_7f5f9855e673e2822145902661a216bb97de855c/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/jesusmiguelflores/AndroidStudioProjects/Ropappi/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="cf65ee7278f0f4de01add65ffdd8401f7681a88e">
-        <dex dex="/Users/jesusmiguelflores/AndroidStudioProjects/Ropappi/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_19b8b4ba1589c20356822ec810f052b203c2f987/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/jesusmiguelflores/AndroidStudioProjects/Ropappi/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jar="/Users/jesusmiguelflores/AndroidStudioProjects/RopaApp/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
         sha1="510aa6efc159983dfbffa676a0dae37568c0a46f">
-        <dex dex="/Users/jesusmiguelflores/AndroidStudioProjects/Ropappi/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_4c2fbe2d458d01aca30879d18e65cd4ca2606d84/classes.dex" />
+        <dex dex="/Users/jesusmiguelflores/AndroidStudioProjects/RopaApp/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_99e13207048fb55a6cb90371e1a41fed55464360/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/jesusmiguelflores/AndroidStudioProjects/RopaApp/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="524f96ec016929e1452abe8cdb49c1b7f30724c5">
+        <dex dex="/Users/jesusmiguelflores/AndroidStudioProjects/RopaApp/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_bd445ba499e8c956865bdf87de3ba3c723c41180/classes.dex" />
     </item>
 
 </items>

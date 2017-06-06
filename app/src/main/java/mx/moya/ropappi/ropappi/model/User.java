@@ -10,12 +10,22 @@ public class User {
     private String correo;
     private String foto;
     private int tipo;
+    private int id;
 
     public User() {
         this.nombre = "";
         this.correo = "";
         this.foto = "";
         this.tipo = -1;
+        this.id = -1;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNombre() {

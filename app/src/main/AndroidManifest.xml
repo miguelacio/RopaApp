@@ -26,9 +26,11 @@
         <activity
             android:name=".ProductDetailActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".LoginActivity"></activity>
-        <activity android:name=".CreateAccountActivity"></activity>
-        <activity android:name=".CartActivity"></activity>
+        <activity
+            android:name=".LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".CreateAccountActivity" />
+        <activity android:name=".CartActivity" />
     </application>
 
 </manifest>

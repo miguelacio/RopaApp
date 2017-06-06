@@ -12,6 +12,10 @@ public class Keys {
     public static final String url_get_login_pt_1 = "https://ropappi.azurewebsites.net/api/userapi/user?correo=";
     public static final String url_get_loginpt_2 = "&clave=";
     public static final String url_post_create_account = "https://ropappi.azurewebsites.net/api/userapi/";
+    public static final String url_get_my_cart = "https://ropappi.azurewebsites.net/api/Categories/carrito/";
+    public static final String url_post_add_to_cart = "https://ropappi.azurewebsites.net/api/carrito/";
+    public static final String url_delete_pay_single = "https://ropappi.azurewebsites.net/api/carrito/";
+    public static final String url_post_pay_all = "https://ropappi.azurewebsites.net/api/categories/carrito/";
 
     public static final String key_id = "id";
     public static final String key_nombre = "nombre";
@@ -20,6 +24,9 @@ public class Keys {
     public static final String key_correo = "correo";
     public static final String key_contrasena = "contrasena";
     public static final String key_tipo = "tipo";
-    public static final String key_respuesta = "respuesta";
+    public static final String key_respuesta = "repsuesta";
     public static final String key_msg = "msg";
+    public static final String key_precio = "precio";
+    public static final String key_id_user = "id_user";
+    public static final String key_id_producto = "id_producto";
 }

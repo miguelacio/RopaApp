@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="mx.moya.ropappi.ropappi.LoginActivity">
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/logo2" />
 
     <RelativeLayout
         android:id="@+id/layout_create_account"
@@ -17,7 +24,9 @@
             android:id="@+id/button_create_account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="¿No tienes cuenta? Crea una aquí" />
+            android:background="@color/colorAccent"
+            android:text="¿No tienes cuenta? Crea una aquí"
+            android:textColor="@android:color/white" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -60,7 +69,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/input_layout_password"
-            android:text="Iniciar Sesion" />
+            android:background="@color/colorAccent"
+            android:text="Iniciar Sesion"
+            android:textColor="@android:color/white" />
     </RelativeLayout>
 
 

@@ -37,7 +37,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View cardview = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_cardview_category, parent, false);
+        View cardview = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_cardview_product, parent, false);
         return new ViewHolder(cardview);
     }
 
@@ -48,6 +48,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         Bitmap imagen = Base64BitmapUtil.decodeBase64(product.getFoto());
         holder.imageViewCategory.setImageBitmap(imagen);
         holder.textViewName.setText(product.getNombre());
+        holder.textViewPrice.setText("$" + product.getPrecio());
         holder.clickView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,15 +63,16 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView textViewName;
+        TextView textViewName, textViewPrice;
         ImageView imageViewCategory;
         View clickView;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
-            this.textViewName = (TextView) itemView.findViewById(R.id.text_view_category_name);
-            this.imageViewCategory = (ImageView) itemView.findViewById(R.id.image_view_category);
+            this.textViewName = (TextView) itemView.findViewById(R.id.text_view_product_name);
+            this.imageViewCategory = (ImageView) itemView.findViewById(R.id.image_view_product);
+            this.textViewPrice = (TextView) itemView.findViewById(R.id.text_view_product_price);
             this.clickView = itemView.findViewById(R.id.click_view);
         }
     }
