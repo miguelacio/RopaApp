@@ -20,6 +20,8 @@ public class Keys {
     public static final String key_id = "id";
     public static final String key_nombre = "nombre";
     public static final String key_descripcion = "descripcion";
+    public static final String key_descripcion_product = "descripcion_product";
+    public static final String key_foto_product = "foto_product";
     public static final String key_foto = "foto";
     public static final String key_correo = "correo";
     public static final String key_contrasena = "contrasena";
@@ -29,4 +31,8 @@ public class Keys {
     public static final String key_precio = "precio";
     public static final String key_id_user = "id_user";
     public static final String key_id_producto = "id_producto";
+    public static final String key_talla = "talla";
+    public static final String key_precio_product = "precio_product";
+    public static final String key_talla_product = "talla_product";
+    public static final String key_nombre_product = "nombre_product";
 }

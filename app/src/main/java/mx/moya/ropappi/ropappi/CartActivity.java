@@ -29,6 +29,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import mx.moya.ropappi.ropappi.model.Carrito;
 import mx.moya.ropappi.ropappi.model.Product;
 import mx.moya.ropappi.ropappi.model.User;
 import mx.moya.ropappi.ropappi.util.CartAdapter;
@@ -46,7 +47,7 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.CartC
     RecyclerView recyclerView;
     User currentUser;
     Button buttonPayAll;
-    ArrayList<Product> arrayList;
+    ArrayList<Carrito> arrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,19 +69,19 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.CartC
     }
 
     private void makeRequestCartData() {
-        progressDialog = DialogUtil.showProgressDialog(this, "Espere un momento", "Obteniendo Productos");
+
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, Keys.url_get_my_cart + currentUser.getId(), null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                progressDialog.dismiss();
+
 
                 try {
-                    arrayList = JSONParser.parseJsonToProducts(response);
+                    arrayList = JSONParser.parseJsonToCarritos(response);
                     CartAdapter cartAdapter = new CartAdapter(arrayList, CartActivity.this);
                     int count = 0;
-                    for (Product p : arrayList) {
-                        count = count + p.getPrecio();
+                    for (Carrito p : arrayList) {
+                        count = count + p.getPrecio_product();
                     }
                     buttonPayAll.setText("Pagar todo $" + count);
                     recyclerView.setAdapter(cartAdapter);
@@ -93,7 +94,7 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.CartC
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                progressDialog.dismiss();
+
             }
         });
 
@@ -101,7 +102,7 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.CartC
     }
 
     @Override
-    public void OnCartSelected(final Product product) {
+    public void OnCartSelected(final Carrito product) {
         new AlertDialog.Builder(CartActivity.this)
                 .setTitle("Ingresa los datos de tu tarjeta")
                 .setView(R.layout.dialog_payment)
@@ -123,12 +124,12 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.CartC
     }
 
     private void payOne(String s) {
-        progressDialog = DialogUtil.showProgressDialog(this, "Espere un momento", "Obteniendo categorias");
+
 
         JsonObjectRequest jsonArrayRequest = new JsonObjectRequest(Request.Method.DELETE, s, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                progressDialog.dismiss();
+
                 if (response != null) {
 
 
@@ -140,7 +141,7 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.CartC
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                progressDialog.dismiss();
+
             }
         });
 
@@ -156,13 +157,12 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.CartC
                         .setView(R.layout.dialog_payment)
                         .setPositiveButton("Comprar", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                progressDialog = DialogUtil.showProgressDialog(CartActivity.this, "Espere un momento", "Obteniendo categorias");
-                                for (Product p : arrayList) {
+                                progressDialog = DialogUtil.showProgressDialog(CartActivity.this, "Espere un momento", "Pagando productos");
+                                for (Carrito p : arrayList) {
                                     payOnebyOne(Keys.url_delete_pay_single + p.getId());
                                 }
                                 progressDialog.dismiss();
                                 makeRequestCartData();
-
 
                             }
                         })

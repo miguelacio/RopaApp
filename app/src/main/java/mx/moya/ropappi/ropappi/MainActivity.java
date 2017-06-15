@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements CategoryAdapter.C
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitle("Bienvenido a RopAppi");
+        setTitle("Bienvenido a Armadillo");
 
         requestQueue = Volley.newRequestQueue(this);
         sessionStateManager = new SessionStateManager(this);
@@ -102,6 +102,11 @@ public class MainActivity extends AppCompatActivity implements CategoryAdapter.C
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_acitivity_main, menu);
 
+        if (sessionStateManager.getCurrentUser() == null) {
+            menu.findItem(R.id.action_log_out).setVisible(true);
+        } else {
+            menu.findItem(R.id.action_log_out).setVisible(false);
+        }
         return true;
     }
 
@@ -133,6 +138,30 @@ public class MainActivity extends AppCompatActivity implements CategoryAdapter.C
                             .setIcon(R.mipmap.ic_launcher_round)
                             .show();
                 }
+                break;
+            case R.id.action_log_out:
+
+                new AlertDialog.Builder(MainActivity.this)
+                        .setTitle("Cerrar Sesión")
+                        .setMessage("¿estás seguro de que quieres cerrar sesión?")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                sessionStateManager.logOut();
+                                Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                                startActivity(intent);
+                                finish();
+
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                        })
+                        .setIcon(R.mipmap.ic_launcher_round)
+                        .show();
                 break;
         }
 

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import mx.moya.ropappi.ropappi.R;
+import mx.moya.ropappi.ropappi.model.Carrito;
 import mx.moya.ropappi.ropappi.model.Product;
 
 /**
@@ -22,14 +23,14 @@ import mx.moya.ropappi.ropappi.model.Product;
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
     public static interface CartCallbacks {
-        public void OnCartSelected(Product product);
+        public void OnCartSelected(Carrito product);
     }
 
-    private ArrayList<Product> productArrayList;
+    private ArrayList<Carrito> productArrayList;
     private Context context;
     private CartCallbacks cartCallbacks;
 
-    public CartAdapter(ArrayList<Product> productArrayList, Context context) {
+    public CartAdapter(ArrayList<Carrito> productArrayList, Context context) {
         this.productArrayList = productArrayList;
         this.context = context;
         this.cartCallbacks = (CartCallbacks) context;
@@ -43,13 +44,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        final Product product = productArrayList.get(position);
+        final Carrito product = productArrayList.get(position);
 
-        Bitmap imagen = Base64BitmapUtil.decodeBase64(product.getFoto());
+        Bitmap imagen = Base64BitmapUtil.decodeBase64(product.getFoto_product());
         holder.imageViewProduct.setImageBitmap(imagen);
-        holder.textViewName.setText(product.getNombre());
-        holder.textViewPrice.setText("$" + product.getPrecio());
-        holder.textViewDescription.setText(product.getDescripcion());
+        holder.textViewName.setText(product.getNombre_product());
+        holder.textViewPrice.setText("$" + product.getPrecio_product());
+        holder.textViewDescription.setText(product.getDescripcion_product());
         holder.buttonPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

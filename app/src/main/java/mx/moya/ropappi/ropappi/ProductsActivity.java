@@ -59,7 +59,7 @@ public class ProductsActivity extends AppCompatActivity implements ProductAdapte
         recyclerView.setLayoutManager(gridLayoutManager);
         id = getIntent().getIntExtra("id", -1);
         String nombreCategory = getIntent().getStringExtra("nombre");
-        toolbar.setTitle(nombreCategory);
+        setTitle(nombreCategory);
 
         makeRequest();
     }

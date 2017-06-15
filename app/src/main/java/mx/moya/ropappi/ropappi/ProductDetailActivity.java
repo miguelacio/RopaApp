@@ -45,12 +45,13 @@ import static mx.moya.ropappi.ropappi.R.id.text_view_product_name;
 public class ProductDetailActivity extends AppCompatActivity implements View.OnClickListener {
 
     ImageView imageViewProduct;
-    TextView textViewProductName, textViewProductDescription, textViewProductPrice;
+    TextView textViewProductName, textViewProductDescription, textViewProductPrice, textViewProductSize;
     Button buttonBuy;
     RequestQueue requestQueue;
     SessionStateManager sessionStateManager;
     ProgressDialog progressDialog;
     int id;
+    Product product;
 
     User currentUser;
 
@@ -69,11 +70,12 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
         id = getIntent().getIntExtra("id", -1);
         String nombreCategory = getIntent().getStringExtra("nombre");
 
-        toolbar.setTitle(nombreCategory);
+        setTitle(nombreCategory);
 
         imageViewProduct = (ImageView) findViewById(R.id.image_view_product);
         textViewProductDescription = (TextView) findViewById(R.id.text_view_product_description);
         textViewProductName = (TextView) findViewById(R.id.text_view_product_name);
+        textViewProductSize = (TextView) findViewById(R.id.text_view_product_size);
         textViewProductPrice = (TextView) findViewById(R.id.text_view_product_price);
         buttonBuy = (Button) findViewById(R.id.button_buy);
 
@@ -91,11 +93,12 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
                 progressDialog.dismiss();
 
                 try {
-                    Product product = JSONParser.parseJsonToProduct(response);
+                    product = JSONParser.parseJsonToProduct(response);
 
                     textViewProductName.setText(product.getNombre());
                     textViewProductDescription.setText(product.getDescripcion());
                     textViewProductPrice.setText("$" + product.getPrecio());
+                    textViewProductSize.setText("Talla " + product.getTalla());
                     Bitmap bitmap = Base64BitmapUtil.decodeBase64(product.getFoto());
                     imageViewProduct.setImageBitmap(bitmap);
                 } catch (JSONException e) {
@@ -163,8 +166,13 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
                     User currentUser = sessionStateManager.getCurrentUser();
                     JSONObject jsonObject = new JSONObject();
                     try {
+                        jsonObject.put(Keys.key_nombre_product, product.getNombre());
                         jsonObject.put(Keys.key_id_user, currentUser.getId());
                         jsonObject.put(Keys.key_id_producto, id);
+                        jsonObject.put(Keys.key_descripcion_product, product.getDescripcion());
+                        jsonObject.put(Keys.key_precio_product, product.getPrecio());
+                        jsonObject.put(Keys.key_talla_product, product.getTalla());
+                        jsonObject.put(Keys.key_foto_product, product.getFoto());
 
                         addToCart(jsonObject);
 

@@ -4,9 +4,17 @@
 
 
     <item
+        android:id="@+id/action_log_out"
+        android:title="Cerrar Sesión"
+        android:icon="@mipmap/ic_exit_to_app_white"
+        app:showAsAction="ifRoom" />
+
+    <item
         android:id="@+id/action_go_to_cart"
         android:title="Carrito"
         android:icon="@mipmap/ic_shopping_cart_white"
         app:showAsAction="ifRoom" />
+
+
 
 </menu>

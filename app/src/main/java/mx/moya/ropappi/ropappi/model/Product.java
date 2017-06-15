@@ -11,9 +11,11 @@ public class Product {
     private String descripcion;
     private int precio;
     private int id_category;
+    private String talla;
     private String foto;
 
     public Product() {
+        this.talla = "";
         this.id = -1;
         this.nombre = "";
         this.descripcion = "";
@@ -28,6 +30,14 @@ public class Product {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getTalla() {
+        return talla;
+    }
+
+    public void setTalla(String talla) {
+        this.talla = talla;
     }
 
     public String getNombre() {
